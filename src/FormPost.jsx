@@ -8,10 +8,16 @@ const FormPost = () => {
 
   const addPost = useMutation({
     mutationFn: (post) => {
-      return apiClient.post("/posts", post).then((res) => res.data); 
+      return apiClient.post("/posts", post).then((res) => res.data);
     },
     onSuccess: (newPost) => {
-      queryClient.setQueryData(["posts"], oldData => [newPost,...(oldData||[])]);
+      queryClient.setQueryData(["posts"], (oldData) => {
+     
+        return {
+          ...oldData,
+          pages: [[newPost, ...oldData.pages[0]], ...oldData.pages.slice(1)],
+        };
+      });
 
       if (refField.current) {
         refField.current.value = "";
@@ -21,6 +27,12 @@ const FormPost = () => {
 
   return (
     <div>
+      {addPost.error && (
+        <p className="text-white px-2 text-center bg-red-600 rounded-lg w-full pt-5">
+          {addPost.error.message}
+        </p>
+      )}
+
       <form
         onSubmit={(e) => {
           e.preventDefault();
@@ -48,7 +60,7 @@ const FormPost = () => {
         <button
           type="submit"
           className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
-          disabled={addPost.isPending} 
+          disabled={addPost.isPending} // Disable the button while the mutation is in progress
         >
           {addPost.isPending ? "Submitting..." : "Submit"}
         </button>
