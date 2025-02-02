@@ -1,20 +1,15 @@
 import apiClient from "../Services/Services";
-import {
-  keepPreviousData,
-  useInfiniteQuery,
-  useQuery,
-} from "@tanstack/react-query";
+import { useInfiniteQuery } from "@tanstack/react-query";
 
 const usePosts = ({ pageSize }) => {
   const fetchPosts = async ({ pageParam = 1 }) => {
-    const res = await apiClient
-      .get("/posts", {
-        params: {
-          _start: (pageParam - 1) * pageSize,
-          _limit: pageSize,
-        },
-      })
-     
+    const res = await apiClient.get("/posts", {
+      params: {
+        _start: (pageParam - 1) * pageSize,
+        _limit: pageSize,
+      },
+    });
+
     return res.data;
   };
 
