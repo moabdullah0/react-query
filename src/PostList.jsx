@@ -1,10 +1,9 @@
-import React, { useState } from "react";
+import React from "react";
 import usePosts from "./hooks/usePosts";
 import FormPost from "./FormPost";
 
 const PostList = () => {
   const pageSize = 10;
-  const [page, setPage] = useState(1);
   const {
     data,
     error,
@@ -12,7 +11,7 @@ const PostList = () => {
     fetchNextPage,
     isFetchingNextPage,
     hasNextPage,
-  } = usePosts({ pageSize,page });
+  } = usePosts({ pageSize });
   return (
     <div>
       <FormPost />
@@ -35,7 +34,6 @@ const PostList = () => {
         ))}
       </div>
 
-      {/* "Load More" button */}
       <div className="flex mt-4">
         {hasNextPage && (
           <button
