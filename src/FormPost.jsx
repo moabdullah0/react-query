@@ -1,5 +1,5 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import React, { useRef } from "react";
+import { useRef } from "react";
 import apiClient from "./Services/Services";
 
 const FormPost = () => {
@@ -12,10 +12,10 @@ const FormPost = () => {
     },
     onMutate: (newPost) => {
       const previousPosts = queryClient.getQueryData(["posts"]);
-      queryClient.setQueryData(["posts"], (oldData) => {
+      queryClient.setQueryData(["posts"], (oldData = []) => {
         return {
           ...oldData,
-          pages: [[newPost, ...oldData.pages[0]], ...oldData.pages.slice(1)],
+          newPost,
         };
       });
       return { previousPosts };

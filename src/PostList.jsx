@@ -1,10 +1,10 @@
-import React, { useRef } from "react";
+import React, { useState } from "react";
 import usePosts from "./hooks/usePosts";
 import FormPost from "./FormPost";
 
 const PostList = () => {
   const pageSize = 10;
-
+  const [page, setPage] = useState(1);
   const {
     data,
     error,
@@ -12,7 +12,7 @@ const PostList = () => {
     fetchNextPage,
     isFetchingNextPage,
     hasNextPage,
-  } = usePosts({ pageSize });
+  } = usePosts({ pageSize,page });
   return (
     <div>
       <FormPost />

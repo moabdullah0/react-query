@@ -27,6 +27,7 @@ const usePosts = ({ pageSize }) => {
       //1 =>2
       return lastPage.length > 0 ? allpages.length + 1 : undefined;
     },
+    staleTime: 10 * 1000,
   });
 
   return {
