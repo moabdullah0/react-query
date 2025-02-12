@@ -1,6 +1,7 @@
 import React from "react";
 import usePosts from "../hooks/usePosts";
 import FormPost from "./FormPost";
+import InfiniteScroll from "react-infinite-scroll-component";
 
 const PostList = () => {
   const pageSize = 10;
@@ -16,23 +17,29 @@ const PostList = () => {
     <div>
       <FormPost />
 
-      <div className="mt-5">
-        {isLoading && <p>Loading posts...</p>}
-        {error && <p>Error fetching posts!</p>}
-
-        {data?.pages.map((page, pageIndex) => (
-          <React.Fragment key={pageIndex}>
-            {page.map((post) => (
-              <li
-                className="inline-flex w-full  items-center gap-x-2 py-3 px-4 text-sm font-semibold bg-white border border-gray-300 hover:text-indigo-600 transition-all duration-300 text-gray-900 -mt-px first:rounded-t-lg first:mt-0 last:rounded-b-lg "
-                key={post.id}
-              >
-                {post.title}
-              </li>
-            ))}
-          </React.Fragment>
-        ))}
-      </div>
+      <InfiniteScroll
+        dataLength={data?.pages.reduce((acc, page) =>acc+page.length,0)||0}
+        next={fetchNextPage}
+        hasMore={!!hasNextPage}
+        loader={<p>Loading...</p>}
+      >
+        <div className="mt-5">
+          {isLoading && <p>Loading posts...</p>}
+          {error && <p>Error fetching posts!</p>}
+          {data?.pages.map((page, pageIndex) => (
+            <React.Fragment key={pageIndex}>
+              {page.map((post) => (
+                <li
+                  className="inline-flex w-full  items-center gap-x-2 py-3 px-4 text-sm font-semibold bg-white border border-gray-300 hover:text-indigo-600 transition-all duration-300 text-gray-900 -mt-px first:rounded-t-lg first:mt-0 last:rounded-b-lg "
+                  key={post.id}
+                >
+                  {post.title}
+                </li>
+              ))}
+            </React.Fragment>
+          ))}
+        </div>
+      </InfiniteScroll>
 
       <div className="flex mt-4">
         {hasNextPage && (
