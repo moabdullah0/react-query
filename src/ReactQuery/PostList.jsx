@@ -1,5 +1,5 @@
 import React from "react";
-import usePosts from "./hooks/usePosts";
+import usePosts from "../hooks/usePosts";
 import FormPost from "./FormPost";
 
 const PostList = () => {

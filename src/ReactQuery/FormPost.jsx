@@ -1,6 +1,6 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { useRef } from "react";
-import apiClient from "./Services/Services";
+import apiClient from "../Services/Services";
 
 const FormPost = () => {
   const queryClient = useQueryClient();
@@ -23,7 +23,7 @@ const FormPost = () => {
     onSuccess: () => {
       if (refField.current) return (refField.current.value = "");
     },
-    onError: (err, newPost, context) => {
+    onError: ( context) => {
       queryClient.setQueryData(["posts"], context.previousPosts);
     },
   });
