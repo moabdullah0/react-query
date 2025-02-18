@@ -1,11 +1,11 @@
 import "./App.css";
-import FormPost from "./ReactQuery/FormPost";
-import PostList from "./ReactQuery/PostList";
+import ContextTest from "./Test/ContextTest";
+import LoginContext from "./Test/LoginContext";
+import Test from "./Test/Test";
+
 // import CourseForm from "./Courses/CourseForm";
 // import CourseList from "./Courses/CourseList";
 // import { CourseProvider } from "./State-Mannagent/context/CourseContext";
-import { ThemeProvider } from "./State-Mannagent/context/ThemeContext";
-import Theme from "./State-Mannagent/Reducer/Theme";
 
 function App() {
   return (
@@ -19,7 +19,10 @@ function App() {
       <Theme/>
         
       </ThemeProvider> */}
-      <PostList/>
+      ssssssssssss
+      <ContextTest>
+        <LoginContext />
+      </ContextTest>
     </div>
   );
 }
