@@ -2,6 +2,8 @@ import "./App.css";
 import ContextTest from "./Test/ContextTest";
 import LoginContext from "./Test/LoginContext";
 import Test from "./Test/Test";
+import Auth from "./zustand/Auth";
+import Counter from "./zustand/Counter";
 
 // import CourseForm from "./Courses/CourseForm";
 // import CourseList from "./Courses/CourseList";
@@ -19,10 +21,12 @@ function App() {
       <Theme/>
         
       </ThemeProvider> */}
-      ssssssssssss
+      {/* ssssssssssss
       <ContextTest>
         <LoginContext />
-      </ContextTest>
+        <Auth/>
+      </ContextTest> */}
+      <Counter/>
     </div>
   );
 }

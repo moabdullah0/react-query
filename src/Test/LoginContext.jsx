@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import { useContext } from "react";
 import { ContextAuth } from "./ContextTest";
 import axios from "axios";
 
